@@ -321,6 +321,166 @@
 
   .demo-banner strong { color: var(--green); }
 
+  /* ─── UPLOAD FORM ─── */
+  .upload-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 48px 40px;
+    max-width: 520px;
+    width: 100%;
+    text-align: left;
+  }
+
+  .upload-card h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+  }
+
+  .upload-card h2 span { color: var(--green); }
+
+  .upload-card .sub {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-input:focus { border-color: rgba(0,230,118,0.5); }
+  .form-input::placeholder { color: var(--muted); opacity: 0.6; }
+
+  .file-drop {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px dashed rgba(0,230,118,0.3);
+    border-radius: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+  }
+
+  .file-drop:hover, .file-drop.dragover {
+    border-color: var(--green);
+    background: rgba(0,230,118,0.05);
+  }
+
+  .file-drop input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .file-drop-icon { font-size: 1.8rem; margin-bottom: 8px; }
+
+  .file-drop-label {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  .file-drop-label strong { color: var(--green); }
+
+  .file-selected {
+    font-size: 0.82rem;
+    color: var(--green);
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .btn-submit {
+    width: 100%;
+    margin-top: 8px;
+    background: var(--green);
+    color: var(--dark);
+    border: none;
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, opacity 0.2s;
+  }
+
+  .btn-submit:hover { background: var(--accent); }
+  .btn-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ─── UPLOAD PROGRESS ─── */
+  .progress-wrap {
+    width: 100%;
+    max-width: 360px;
+    margin-top: 8px;
+  }
+
+  .progress-bar-track {
+    background: rgba(0,230,118,0.12);
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 100px;
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .progress-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ─── SUCCESS STATE ─── */
+  .success-icon {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(0,230,118,0.12);
+    border: 2px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 20px;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 680px) {
     nav { padding: 0 20px; }
@@ -328,6 +488,7 @@
     .report-header { flex-direction: column; }
     .feedback-grid { grid-template-columns: 1fr; }
     .report-footer { padding: 20px; }
+    .upload-card { padding: 32px 24px; }
   }
 </style>
 </head>
@@ -345,6 +506,53 @@
     <div class="spinner"></div>
     <h2>Loading report…</h2>
     <p>Fetching your scouting report.</p>
+  </div>
+
+  <!-- Upload form state -->
+  <div class="state" id="state-upload" style="display:none;">
+    <div class="upload-card">
+      <h2>Submit your <span>pitch</span></h2>
+      <p class="sub">Upload a video clip of your play. Our AI scout will analyze your technique and email you a full report in about 2 minutes.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="input-email">Your email</label>
+        <input class="form-input" type="email" id="input-email" placeholder="you@example.com" autocomplete="email" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Video clip</label>
+        <div class="file-drop" id="file-drop">
+          <input type="file" id="input-file" accept="video/*" />
+          <div class="file-drop-icon">🎬</div>
+          <div class="file-drop-label"><strong>Choose video</strong> or drag & drop</div>
+          <div class="file-drop-label" style="margin-top:4px;font-size:0.78rem;">MP4, MOV, AVI · max 500 MB</div>
+        </div>
+        <div class="file-selected" id="file-name-display" style="display:none;"></div>
+      </div>
+
+      <div id="upload-error" style="display:none;font-size:0.85rem;color:var(--red);margin-bottom:12px;"></div>
+
+      <button class="btn-submit" id="btn-submit" disabled>Analyze my pitch →</button>
+    </div>
+  </div>
+
+  <!-- Uploading state -->
+  <div class="state" id="state-uploading" style="display:none;">
+    <div class="spinner"></div>
+    <h2>Uploading…</h2>
+    <div class="progress-wrap">
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-label" id="progress-label">0%</div>
+    </div>
+  </div>
+
+  <!-- Success state -->
+  <div class="state" id="state-success" style="display:none;">
+    <div class="success-icon">✓</div>
+    <h2>Video received</h2>
+    <p>Your clip is being analyzed. You'll receive your scout report at <strong id="success-email" style="color:var(--green);"></strong> in about 2 minutes.</p>
   </div>
 
   <!-- Error state -->
@@ -394,33 +602,32 @@
 </div>
 
 <script>
-  // ── Map backend rating values → CSS class + label ──
+  const API_BASE = 'https://mdvmhkrsc3.execute-api.us-east-1.amazonaws.com';
+
+  function show(id) { document.getElementById(id).style.display = id.startsWith('state') ? 'flex' : 'block'; }
+  function hide(id) { document.getElementById(id).style.display = 'none'; }
+
   const RATING_MAP = {
     green:  { cls: 'positive', prefix: '✦ Strength' },
     yellow: { cls: 'neutral',  prefix: '◈ Developing' },
     red:    { cls: 'negative', prefix: '▼ Needs work' },
   };
 
-  // ── Grade colour tint (A=green, B=green-dim, C=yellow, D/F=red) ──
   function gradeColor(g) {
     if (!g) return 'var(--green)';
-    const first = g[0].toUpperCase();
-    if (first === 'A') return '#00e676';
-    if (first === 'B') return '#00b85a';
-    if (first === 'C') return '#ffd166';
+    const f = g[0].toUpperCase();
+    if (f === 'A') return '#00e676';
+    if (f === 'B') return '#00b85a';
+    if (f === 'C') return '#ffd166';
     return '#ff6b6b';
   }
 
   function renderReport(data, isDemo) {
-    // Grade
     const gradeEl = document.getElementById('report-grade');
     gradeEl.textContent = data.overall_grade || '—';
     gradeEl.style.color = gradeColor(data.overall_grade);
-
-    // Summary
     document.getElementById('report-summary').textContent = data.summary || '';
 
-    // Feedback cards
     const grid = document.getElementById('feedback-grid');
     grid.innerHTML = '';
     (data.feedback || []).forEach(item => {
@@ -434,52 +641,130 @@
       grid.appendChild(card);
     });
 
-    // Demo banner
     if (isDemo) {
-      document.getElementById('demo-banner').style.display = 'flex';
+      show('demo-banner');
       document.getElementById('report-eyebrow').textContent = 'Sample Report';
       document.getElementById('report-title-line').textContent = 'Demo';
     }
 
-    // Show report
-    document.getElementById('state-loading').style.display = 'none';
-    document.getElementById('report-content').style.display = 'block';
+    hide('state-loading');
+    show('report-content');
   }
 
-  // ── Demo data (mirrors the real backend schema) ──
-  const DEMO_DATA = {
-    overall_grade: 'B',
-    summary: 'The player showed solid technical ability throughout the clip, particularly in ball retention under pressure and positional awareness in the midfield zone. Decision-making was generally sharp, with good use of space when receiving in tight areas. Athleticism and work rate were consistent, though final-third delivery and weak-foot confidence remain areas for development.',
-    feedback: [
-      { category: 'First Touch',   rating: 'green',  comment: 'Consistently controls the ball cleanly on the first touch, setting up quick transitions and maintaining team momentum.' },
-      { category: 'Passing',       rating: 'green',  comment: 'Accurate short-to-medium range distribution with good weight — completes passes under pressure reliably.' },
-      { category: 'Movement',      rating: 'yellow', comment: 'Shows good off-ball runs but timing into space is occasionally early, reducing the effectiveness of through-ball opportunities.' },
-      { category: 'Positioning',   rating: 'yellow', comment: 'Generally well-positioned in midfield but drifts narrow when the team is out of possession, leaving wide channels exposed.' },
-      { category: 'Athleticism',   rating: 'green',  comment: 'Strong engine throughout — maintains pace and intensity from start to finish of the clip with no visible drop-off.' },
-      { category: 'Weak Foot',     rating: 'red',    comment: 'Noticeably avoids the left foot when under pressure — targeted training on weak-foot confidence would raise overall ceiling significantly.' },
-    ],
-  };
+  // ── Upload form logic ──
+  let selectedFile = null;
 
-  // ── Main: try to load from ?session_id=, fall back to demo ──
+  function validateForm() {
+    const email = document.getElementById('input-email').value.trim();
+    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && selectedFile !== null;
+    document.getElementById('btn-submit').disabled = !valid;
+  }
+
+  document.getElementById('input-email').addEventListener('input', validateForm);
+
+  const fileInput = document.getElementById('input-file');
+  const fileDrop  = document.getElementById('file-drop');
+
+  function onFileChosen(file) {
+    if (!file) return;
+    if (!file.type.startsWith('video/')) {
+      showUploadError('Please select a video file (MP4, MOV, AVI, etc.)');
+      return;
+    }
+    if (file.size > 500 * 1024 * 1024) {
+      showUploadError('File exceeds 500 MB limit. Please trim or compress the clip.');
+      return;
+    }
+    selectedFile = file;
+    const display = document.getElementById('file-name-display');
+    display.textContent = `${file.name}  (${(file.size / 1024 / 1024).toFixed(1)} MB)`;
+    display.style.display = 'block';
+    hide('upload-error');
+    validateForm();
+  }
+
+  fileInput.addEventListener('change', () => onFileChosen(fileInput.files[0]));
+  fileDrop.addEventListener('dragover', e => { e.preventDefault(); fileDrop.classList.add('dragover'); });
+  fileDrop.addEventListener('dragleave', () => fileDrop.classList.remove('dragover'));
+  fileDrop.addEventListener('drop', e => {
+    e.preventDefault();
+    fileDrop.classList.remove('dragover');
+    onFileChosen(e.dataTransfer.files[0]);
+  });
+
+  function showUploadError(msg) {
+    const el = document.getElementById('upload-error');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  document.getElementById('btn-submit').addEventListener('click', async () => {
+    const email = document.getElementById('input-email').value.trim();
+    if (!selectedFile || !email) return;
+
+    hide('state-upload');
+    show('state-uploading');
+
+    try {
+      const res = await fetch(`${API_BASE}/upload-url`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          filename: selectedFile.name,
+          content_type: selectedFile.type || 'video/mp4',
+        }),
+      });
+      if (!res.ok) throw new Error('Could not get upload URL');
+      const { upload_url } = await res.json();
+
+      await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', upload_url);
+        xhr.setRequestHeader('Content-Type', selectedFile.type || 'video/mp4');
+
+        xhr.upload.addEventListener('progress', e => {
+          if (e.lengthComputable) {
+            const pct = Math.round((e.loaded / e.total) * 100);
+            document.getElementById('progress-fill').style.width = `${pct}%`;
+            document.getElementById('progress-label').textContent = `${pct}%`;
+          }
+        });
+
+        xhr.addEventListener('load', () => xhr.status < 300 ? resolve() : reject(new Error(`S3 ${xhr.status}`)));
+        xhr.addEventListener('error', () => reject(new Error('Upload failed')));
+        xhr.send(selectedFile);
+      });
+
+      hide('state-uploading');
+      document.getElementById('success-email').textContent = email;
+      show('state-success');
+
+    } catch (err) {
+      hide('state-uploading');
+      show('state-upload');
+      showUploadError('Upload failed — please try again. ' + err.message);
+    }
+  });
+
+  // ── Init: route by ?session_id ──
   async function init() {
     const params = new URLSearchParams(window.location.search);
     const sessionId = params.get('session_id');
 
     if (!sessionId) {
-      // No session ID — show demo
-      renderReport(DEMO_DATA, true);
+      hide('state-loading');
+      show('state-upload');
       return;
     }
 
-    const API_URL = 'https://mdvmhkrsc3.execute-api.us-east-1.amazonaws.com/report';
     try {
-      const res = await fetch(`${API_URL}?session_id=${encodeURIComponent(sessionId)}`);
+      const res = await fetch(`${API_BASE}/report?session_id=${encodeURIComponent(sessionId)}`);
       if (!res.ok) throw new Error('not found');
-      const data = await res.json();
-      renderReport(data, false);
+      renderReport(await res.json(), false);
     } catch {
-      document.getElementById('state-loading').style.display = 'none';
-      document.getElementById('state-error').style.display = 'flex';
+      hide('state-loading');
+      show('state-error');
     }
   }
 
