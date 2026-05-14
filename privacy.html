@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — PitchScout AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --green: #00e676;
+    --green-dim: #00b85a;
+    --dark: #080f0a;
+    --surface: #0d1a10;
+    --surface2: #122018;
+    --border: rgba(0,230,118,0.15);
+    --text: #e8f5ec;
+    --muted: #7a9982;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Barlow', sans-serif;
+    background: var(--dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(0,230,118,0.025) 60px, rgba(0,230,118,0.025) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(0,230,118,0.018) 60px, rgba(0,230,118,0.018) 61px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(8,15,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--text); opacity: 0.5; }
+
+  .nav-back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-back:hover { color: var(--text); }
+
+  .page-wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 112px 40px 80px;
+  }
+
+  .page-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 12px;
+  }
+
+  .last-updated {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  h2 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-top: 48px;
+    margin-bottom: 16px;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+
+  h2:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  p {
+    font-size: 0.975rem;
+    line-height: 1.75;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  p strong { color: var(--text); font-weight: 600; }
+
+  ul {
+    list-style: none;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  li {
+    font-size: 0.975rem;
+    line-height: 1.6;
+    color: var(--muted);
+    padding-left: 20px;
+    position: relative;
+  }
+
+  li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: 700;
+  }
+
+  .callout {
+    background: rgba(0,230,118,0.06);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin: 24px 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text);
+  }
+
+  .callout strong { color: var(--green); }
+
+  a { color: var(--green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-legal {
+    font-size: 0.75rem;
+    color: rgba(122,153,130,0.5);
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .page-wrap { padding: 96px 20px 60px; }
+    footer { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Pitch<span>Scout</span> AI</a>
+  <a href="/" class="nav-back">← Back to home</a>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-label">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p class="last-updated">Last updated: May 2025</p>
+
+  <h2>Overview</h2>
+  <p>PitchScout AI is a video analysis platform for youth and amateur soccer. We take privacy seriously — especially when it comes to players under 18. This policy explains what data we collect, why we collect it, and how we handle it.</p>
+  <p>If you have questions, contact us at <a href="mailto:support@pitchscout.ai">support@pitchscout.ai</a>.</p>
+
+  <h2>What we collect</h2>
+  <p>We collect the minimum information needed to run the analysis and deliver your report:</p>
+  <ul>
+    <li><strong>Jersey number</strong> — used to identify the player in the footage</li>
+    <li><strong>Position, age group, dominant foot, match type, kit colour</strong> — used to contextualise the analysis and grade the player against appropriate benchmarks</li>
+    <li><strong>Video footage</strong> — uploaded directly to encrypted cloud storage for processing</li>
+    <li><strong>Email address</strong> — used to deliver the completed report and to send a link to retrieve it</li>
+    <li><strong>Session identifiers</strong> — anonymous IDs used to link your upload to your report</li>
+  </ul>
+  <p><strong>We do not collect player names, parent names, addresses, phone numbers, or any other personal identifying information.</strong></p>
+
+  <h2>Children's privacy (COPPA)</h2>
+  <div class="callout"><strong>PitchScout AI is designed for use by coaches, club staff, and parents — not directly by minors.</strong> We do not knowingly collect personal information from children under 13. Player data is submitted by an authorised adult on the player's behalf.</div>
+  <p>We never ask for a player's name. All analysis is keyed to a jersey number only. Players are never identifiable from the data we store.</p>
+  <p>If you believe a minor's data has been submitted without appropriate authorisation, contact us at <a href="mailto:support@pitchscout.ai">support@pitchscout.ai</a> and we will delete it promptly.</p>
+
+  <h2 id="data-handling">How we handle your data</h2>
+  <p>Here is exactly what happens to your data from upload to delivery:</p>
+  <ul>
+    <li><strong>Upload</strong> — Video is transferred directly to an encrypted AWS S3 bucket in the US East region using a time-limited secure URL. It is never routed through our web servers.</li>
+    <li><strong>Analysis</strong> — Once uploaded, the footage is submitted to TwelveLabs (our AI video analysis provider) for processing. TwelveLabs processes the video on our behalf under a data processing agreement.</li>
+    <li><strong>Report delivery</strong> — Your report is delivered by email via Amazon SES. The email contains a secure link unique to your session.</li>
+    <li><strong>Storage</strong> — Report data is stored in MongoDB Atlas (encrypted at rest). Video footage is retained for a limited period after analysis to allow for re-processing if needed, then permanently deleted.</li>
+    <li><strong>No sale of data</strong> — We do not sell, rent, or share your data with advertisers or third parties for marketing purposes.</li>
+    <li><strong>No facial recognition</strong> — We do not use facial recognition or biometric identification at any point in our analysis pipeline.</li>
+  </ul>
+
+  <h2>Third-party services</h2>
+  <p>PitchScout AI relies on the following third-party providers to deliver the service. Each is bound by its own privacy policy and, where applicable, a data processing agreement with us:</p>
+  <ul>
+    <li><strong>Amazon Web Services (AWS)</strong> — cloud infrastructure, video storage (S3), and email delivery (SES)</li>
+    <li><strong>TwelveLabs</strong> — AI video analysis and understanding</li>
+    <li><strong>MongoDB Atlas</strong> — encrypted database for report and session storage</li>
+    <li><strong>Amazon Cognito</strong> — authentication for club and coach accounts</li>
+  </ul>
+
+  <h2>Data retention</h2>
+  <p>We retain data for the minimum period necessary:</p>
+  <ul>
+    <li><strong>Video footage</strong> — deleted after analysis is complete and the report has been delivered</li>
+    <li><strong>Report data</strong> — retained for as long as your account or report link is active. You can request deletion at any time.</li>
+    <li><strong>Email addresses</strong> — retained only to deliver your report. We do not send marketing emails without explicit opt-in.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>Request a copy of any data we hold about you or your player</li>
+    <li>Request deletion of any session, report, or uploaded footage</li>
+    <li>Withdraw consent and have all associated data removed</li>
+    <li>Lodge a complaint with a relevant data protection authority</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:support@pitchscout.ai">support@pitchscout.ai</a> with your session ID or report link and we will respond within 5 business days.</p>
+
+  <h2>Security</h2>
+  <p>All data is encrypted in transit (TLS 1.2+) and at rest. Access to production systems is restricted to authorised personnel only. We conduct regular reviews of our security posture and respond promptly to any identified vulnerabilities.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>We may update this policy from time to time. Material changes will be noted at the top of this page with a revised date. Continued use of PitchScout AI after changes are posted constitutes acceptance of the updated policy.</p>
+
+  <h2>Contact</h2>
+  <p>For any privacy-related questions or requests, contact us at <a href="mailto:support@pitchscout.ai">support@pitchscout.ai</a>.</p>
+</div>
+
+<footer>
+  <div class="footer-logo">PitchScout AI</div>
+  <ul class="footer-links">
+    <li><a href="privacy.html">Privacy policy</a></li>
+    <li><a href="privacy.html#data-handling">How we handle data</a></li>
+    <li><a href="mailto:support@pitchscout.ai">Contact</a></li>
+  </ul>
+  <div class="footer-legal">© 2025 PitchScout AI. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
